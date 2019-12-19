@@ -1,0 +1,59 @@
+{
+    "name": "Firstrade",
+    "description": "<p>Firstrade is a leading online investment firm offering a full line of investment products and tools designed to help investors take control of their financial future. Since its founding in 1985, Firstrade has been committed in providing high value and quality services to our customers. Combining proprietary trading technology, a highly intuitive user interface, outstanding customer service and mobility applications, Firstrade offers a comprehensive solution for all of your investing needs. Whether you are a new investor or active trader, at Firstrade, we are committed to excellence, and putting the investor first. Firstrade is a member of FINRA\/SIPC. Discover online investment opportunities with Firstrade Securities today.<\/p>",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28329-www-firstrade-com.jpg",
+    "tags": [
+        "api not found",
+        "financial",
+        "financial services",
+        "have api",
+        "marketplaces"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/firstrade\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Firstrade",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28329-www-firstrade-com.jpg",
+            "humanURL": "https:\/\/www.firstrade.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/firstrade-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/firstrade-postman-collection.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/firstrade-securities-inc"
+        },
+        {
+            "type": "Email",
+            "url": "service@firstrade.com"
+        },
+        {
+            "type": "Email",
+            "url": "jocelyn.xiao@firstrade.com"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/Firstrade"
+        },
+        {
+            "type": "Website",
+            "url": "https:\/\/www.firstrade.com"
+        }
+    ]
+}
