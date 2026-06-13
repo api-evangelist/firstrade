@@ -1,0 +1,98 @@
+aid: firstrade
+name: Firstrade
+description: >-
+  Firstrade Securities is a commission-free online brokerage offering trading
+  in stocks, ETFs, options, mutual funds, and fixed income securities with no
+  account minimums and no inactivity fees. Firstrade does not publish an
+  official public REST API; programmatic account access is available through
+  the Plaid financial data aggregator, which supports account balance retrieval,
+  transaction history, investment holdings, and asset reports for Firstrade
+  accounts. Community-developed unofficial Python SDKs also exist for session-
+  based automation but are not affiliated with or endorsed by Firstrade.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/firstrade/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+type: Index
+tags:
+  - Brokerage
+  - Commission-Free Trading
+  - Stocks
+  - ETFs
+  - Options
+  - Mutual Funds
+  - Fixed Income
+  - Retirement
+  - IRA
+  - Investing
+  - Finance
+  - Open Banking
+apis:
+  - name: Firstrade Account Data API (via Plaid)
+    description: >-
+      Access to Firstrade account data is available through the Plaid financial
+      data aggregation platform. Plaid supports four product categories for
+      Firstrade: Assets (consolidated balance summaries and asset reports),
+      Balance (current and available account balances), Transactions (up to
+      24 months of transaction history), and Investments (retirement, brokerage,
+      and crypto holdings). Authentication is handled via Plaid Link — Firstrade
+      customers connect their accounts through Plaid's consent-based flow. Data
+      is returned in JSON format through Plaid's standard endpoints. Geographic
+      coverage is United States only.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://plaid.com/institutions/firstrade/
+    baseURL: https://production.plaid.com
+    tags:
+      - Account Data
+      - Balance
+      - Transactions
+      - Investments
+      - Assets
+      - Open Banking
+      - Plaid
+    properties:
+      - type: Documentation
+        url: https://plaid.com/institutions/firstrade/
+      - type: APIReference
+        url: https://plaid.com/docs/api/
+      - type: Authentication
+        url: https://plaid.com/docs/link/
+      - type: TermsOfService
+        url: https://www.firstrade.com/content/en-us/aboutus/privacypolicy
+      - type: PrivacyPolicy
+        url: https://www.firstrade.com/content/en-us/aboutus/privacypolicy
+      - type: Plans
+        url: https://raw.githubusercontent.com/api-evangelist/firstrade/refs/heads/main/plans/plans.yml
+      - type: RateLimits
+        url: https://raw.githubusercontent.com/api-evangelist/firstrade/refs/heads/main/rate-limits/rate-limits.yml
+      - type: FinOps
+        url: https://raw.githubusercontent.com/api-evangelist/firstrade/refs/heads/main/finops/finops.yml
+    contact:
+      - FN: Firstrade Customer Support
+        url: https://www.firstrade.com/support
+        phone: 1-800-869-8800
+common:
+  - type: Website
+    url: https://www.firstrade.com/
+  - type: Trading
+    url: https://www.firstrade.com/trading
+  - type: Pricing
+    url: https://www.firstrade.com/trading/pricing
+  - type: HelpCenter
+    url: https://help.firstrade.com/
+  - type: PrivacyPolicy
+    url: https://www.firstrade.com/content/en-us/aboutus/privacypolicy
+  - type: TermsOfService
+    url: https://www.firstrade.com/content/en-us/aboutus/termsofuse
+  - type: PressCenter
+    url: https://www.firstrade.com/press
+  - type: MobileApp
+    url: https://apps.apple.com/us/app/firstrade-invest-trade/id405325225
+  - type: OpenBankingTracker
+    url: https://www.openbankingtracker.com/provider/firstrade
+  - type: PlaidIntegration
+    url: https://plaid.com/institutions/firstrade/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

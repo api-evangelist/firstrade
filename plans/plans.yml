@@ -1,0 +1,44 @@
+plans:
+  - name: Commission-Free Brokerage Account
+    description: >-
+      Firstrade's standard brokerage offering has no account minimums, no
+      inactivity fees, and $0 commissions on stocks, ETFs, options, and
+      mutual funds. All self-directed customers receive the same pricing tier
+      with access to the full trading platform, extended-hours trading, and
+      market research tools including Morningstar, OptionsPlay, Briefing.com,
+      and Zacks. There is no separate paid tier for API or data access —
+      programmatic access is achieved exclusively through third-party aggregators
+      such as Plaid.
+    url: https://www.firstrade.com/trading/pricing
+    features:
+      - $0 commission on stocks and ETFs
+      - $0 commission and $0 contract fees on options
+      - Commission-free mutual fund trading (11,000+ funds)
+      - No account minimum
+      - No inactivity fee
+      - Extended-hours trading (8am–8pm ET Mon–Fri; overnight 8pm–4am ET Sun–Fri)
+      - Real-time market data and quotes
+      - OptionsWizard professional-grade options analytics tool
+      - Morningstar, OptionsPlay, Briefing.com, and Zacks research
+      - SIPC insurance up to $500,000 plus additional coverage to $37.5 million
+      - Fractional share trading
+      - Automatic dividend reinvestment (DRIP) at no cost
+      - Margin lending (for eligible accounts)
+      - Securities lending income program
+      - Cash management services
+  - name: Plaid Developer Access (Data Aggregation)
+    description: >-
+      Developers who need programmatic access to Firstrade account data can
+      integrate via Plaid's financial data platform. Plaid connects to
+      Firstrade and offers Assets, Balance, Transactions, and Investments
+      product categories. Plaid's own pricing tiers (Launch, Scale, Enterprise)
+      apply; Firstrade itself does not charge developers for this data path.
+    url: https://plaid.com/institutions/firstrade/
+    features:
+      - Account balance retrieval (current and available)
+      - Transaction history up to 24 months
+      - Investment holdings (brokerage, retirement, crypto)
+      - Asset reports in JSON and PDF formats
+      - Account owner identity data
+      - Consent-based authentication via Plaid Link
+      - US-only geographic coverage

@@ -1,0 +1,56 @@
+finops:
+  model: Commission-Free Brokerage / Aggregator-Based API Access
+  description: >-
+    Firstrade operates a zero-commission brokerage model — there are no trading
+    fees for stocks, ETFs, options, or most mutual funds. Firstrade does not
+    offer a paid developer API tier or a direct-access data subscription.
+    Programmatic account data access is available only through Plaid, which
+    has its own separate developer pricing. Firstrade generates revenue through
+    payment for order flow, margin interest, securities lending, and ancillary
+    service fees.
+  costStructure:
+    - tier: Stock and ETF Trades
+      cost: $0 per trade
+      conditions: Self-directed orders placed through web or mobile platforms.
+    - tier: Options Trades
+      cost: $0 commission, $0 per contract
+      conditions: Self-directed options orders. Regulatory fees still apply.
+    - tier: Mutual Funds
+      cost: $0 (load and no-load NTF funds)
+      conditions: >-
+        Free for NTF (no transaction fee) funds. Redemptions of mutual fund
+        shares held less than 90 days incur a $19.95 short-term redemption fee.
+        Redemptions under $500 face a $19.95 fee unless the fund total is below $500.
+    - tier: Broker-Assisted Orders
+      cost: $19.95 per order (stocks/ETFs); $19.95 + $0.50/contract (options)
+      conditions: Orders placed with the assistance of a Firstrade broker representative.
+    - tier: Primary Market CDs
+      cost: $30 per transaction
+      conditions: New-issue certificates of deposit purchased in the primary market.
+    - tier: SEC Transaction Fee
+      cost: $0.00002060 per dollar ($20.60 per million dollars)
+      conditions: Applied to eligible sell transactions as of April 6, 2026.
+    - tier: Options Regulatory Fee (ORF)
+      cost: $0.02375 per contract
+      conditions: Aggregate ORF rate as of January 2, 2026. Applied to option trades.
+    - tier: Domestic Wire Transfer (Withdrawal)
+      cost: $25 per withdrawal
+      conditions: Outbound wire transfers. ACH withdrawals are free.
+    - tier: Full Account Transfer Out (ACAT)
+      cost: $75
+      conditions: Full outgoing ACAT transfer to another brokerage.
+    - tier: Short Borrow Fee
+      cost: Variable
+      conditions: Rate depends on market supply and demand for the borrowed security.
+    - tier: API Access via Plaid
+      cost: Governed by Plaid's pricing (separate from Firstrade)
+      conditions: >-
+        Firstrade itself does not charge for API access. Developers must sign up
+        with Plaid and pay per Plaid's Launch, Scale, or Enterprise plan tiers to
+        access Firstrade account data programmatically.
+  notes: >-
+    Firstrade does not publish a formal API monetization strategy or developer
+    pricing page. All fees above are brokerage service fees for end-customers,
+    not API consumption fees. For institutional or high-volume data access,
+    contact Firstrade at 1-800-869-8800.
+  url: https://www.firstrade.com/trading/pricing

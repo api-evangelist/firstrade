@@ -1,0 +1,28 @@
+rateLimits:
+  - name: No Official API Rate Limits Published
+    description: >-
+      Firstrade does not publish an official public REST API and therefore
+      does not publicly document API rate limits. All programmatic access to
+      Firstrade account data runs through the Plaid financial data aggregation
+      platform, which enforces its own rate limits per developer account tier.
+      Plaid's rate limits vary by product and pricing plan and are documented
+      in Plaid's developer documentation.
+    url: https://plaid.com/docs/api/
+  - name: Plaid Rate Limits (applicable when accessing Firstrade via Plaid)
+    description: >-
+      When accessing Firstrade data through Plaid, the applicable rate limits
+      are those of the Plaid API. Plaid enforces per-endpoint rate limits that
+      scale with developer plan tier (Launch, Scale, Enterprise). Specific
+      numeric limits (requests per minute or per day) are tier-dependent and
+      detailed in Plaid's official rate-limiting documentation. Developers on
+      the Launch plan face lower thresholds; Scale and Enterprise plans provide
+      higher throughput. Plaid may impose additional throttling on investment
+      data endpoints due to data freshness and reconciliation windows.
+    url: https://plaid.com/docs/errors/rate-limit-exceeded/
+notes: >-
+  Firstrade's web and mobile platforms use session-based authentication
+  with no publicly documented rate limits for end-users. Unofficial community
+  SDKs that reverse-engineer the Firstrade web session may encounter
+  undisclosed server-side throttling. Firstrade has not published any
+  documentation on automated access policies. Contact Firstrade support
+  at 1-800-869-8800 for institutional or automated access enquiries.
