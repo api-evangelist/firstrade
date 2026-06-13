@@ -1,0 +1,136 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "oc": "https://openapi.org/schema/",
+    "fibo": "https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/"
+  },
+  "@type": "WebAPI",
+  "@id": "https://api3x.firstrade.com",
+  "name": "Firstrade Unofficial API",
+  "description": "Community-reverse-engineered REST API for Firstrade Securities brokerage platform. Provides account management, equity and option trading, real-time market data, and watchlist functionality. Not an official Firstrade API.",
+  "url": "https://www.firstrade.com",
+  "provider": {
+    "@type": "Organization",
+    "name": "Firstrade Securities Inc.",
+    "url": "https://www.firstrade.com",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "1-800-869-8800",
+      "contactType": "customer support",
+      "url": "https://www.firstrade.com/support"
+    }
+  },
+  "serviceType": "BrokerageAPI",
+  "availableChannel": [
+    {
+      "@type": "ServiceChannel",
+      "name": "Authentication",
+      "description": "Session login with username/password and MFA (TOTP, PIN, email OTP, SMS OTP)",
+      "serviceUrl": "https://api3x.firstrade.com/sess"
+    },
+    {
+      "@type": "ServiceChannel",
+      "name": "Account Management",
+      "description": "Account list, balances, positions, and transaction history",
+      "serviceUrl": "https://api3x.firstrade.com/private"
+    },
+    {
+      "@type": "ServiceChannel",
+      "name": "Order Management",
+      "description": "Place, preview, list, and cancel equity and option orders",
+      "serviceUrl": "https://api3x.firstrade.com/private"
+    },
+    {
+      "@type": "ServiceChannel",
+      "name": "Market Data",
+      "description": "Real-time and delayed stock quotes, OHLC chart data, and option chains with Greeks",
+      "serviceUrl": "https://api3x.firstrade.com/public"
+    },
+    {
+      "@type": "ServiceChannel",
+      "name": "Watchlists",
+      "description": "Create, read, update, and delete watchlists and watchlist symbols",
+      "serviceUrl": "https://api3x.firstrade.com/private"
+    }
+  ],
+  "offers": {
+    "@type": "Offer",
+    "name": "Commission-Free Trading",
+    "description": "Firstrade offers commission-free trading of stocks, ETFs, options, and mutual funds with no account minimums.",
+    "price": "0",
+    "priceCurrency": "USD",
+    "url": "https://www.firstrade.com/trading/pricing"
+  },
+  "termsOfService": "https://www.firstrade.com/content/en-us/aboutus/termsofuse",
+  "privacyPolicy": "https://www.firstrade.com/content/en-us/aboutus/privacypolicy",
+  "documentation": "https://github.com/MaxxRK/firstrade-api",
+  "additionalProperty": [
+    {
+      "@type": "PropertyValue",
+      "name": "apiType",
+      "value": "unofficial"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "authenticationMethod",
+      "value": "Session-based with ftat/sid header tokens"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "mfaSupport",
+      "value": "TOTP, PIN, email OTP, SMS OTP"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "dataFormat",
+      "value": "JSON (gzip-compressed)"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "geographicCoverage",
+      "value": "United States"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "plaidIntegration",
+      "value": "https://plaid.com/institutions/firstrade/"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "communitySdkRepo",
+      "value": "https://github.com/MaxxRK/firstrade-api"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "openApiSpec",
+      "value": "https://raw.githubusercontent.com/api-evangelist/firstrade/refs/heads/main/openapi/openapi.yml"
+    }
+  ],
+  "subjectOf": [
+    {
+      "@type": "FinancialProduct",
+      "name": "Stock Trading",
+      "description": "Commission-free stock and ETF trading including fractional shares",
+      "url": "https://www.firstrade.com/trading"
+    },
+    {
+      "@type": "FinancialProduct",
+      "name": "Options Trading",
+      "description": "Options contract trading with Greeks analytics",
+      "url": "https://www.firstrade.com/trading"
+    },
+    {
+      "@type": "FinancialProduct",
+      "name": "Retirement Accounts",
+      "description": "IRA, Roth IRA, SEP IRA, SIMPLE IRA brokerage accounts",
+      "url": "https://www.firstrade.com"
+    }
+  ],
+  "mainEntity": {
+    "@type": "SoftwareApplication",
+    "name": "Firstrade Mobile App",
+    "operatingSystem": "iOS, Android",
+    "applicationCategory": "FinanceApplication",
+    "url": "https://apps.apple.com/us/app/firstrade-invest-trade/id405325225"
+  }
+}
