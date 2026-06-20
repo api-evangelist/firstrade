@@ -9,7 +9,7 @@ description: >-
   transaction history, investment holdings, and asset reports for Firstrade
   accounts. Community-developed unofficial Python SDKs also exist for session-
   based automation but are not affiliated with or endorsed by Firstrade.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/firstrade/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -40,7 +40,7 @@ apis:
       customers connect their accounts through Plaid's consent-based flow. Data
       is returned in JSON format through Plaid's standard endpoints. Geographic
       coverage is United States only.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://plaid.com/institutions/firstrade/
     baseURL: https://production.plaid.com
     tags:
