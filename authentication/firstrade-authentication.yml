@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: sessionAuth
+  type: apiKey
+  in: header
+  parameter: ftat
+  description: 'Session token obtained after login. The ftat header must be accompanied by a
+    sid header (session ID) and the static access-token header (value: 833w3XuIFycv18ybi).'
+  sources:
+  - openapi/openapi.yml

@@ -73,6 +73,10 @@ apis:
         url: https://www.firstrade.com/support
         phone: 1-800-869-8800
 common:
+  - type: DomainSecurity
+    url: security/firstrade-domain-security.yml
+  - type: Authentication
+    url: authentication/firstrade-authentication.yml
   - type: Website
     url: https://www.firstrade.com/
   - type: Trading
