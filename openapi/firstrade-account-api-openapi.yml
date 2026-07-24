@@ -1,0 +1,192 @@
+openapi: 3.0.3
+info:
+  title: Firstrade Unofficial Account API
+  description: 'Community-reverse-engineered REST API for the Firstrade Securities brokerage platform (https://www.firstrade.com). This is NOT an official Firstrade API. Endpoints are discovered from network traffic analysis and are subject to change without notice. The base URL is the internal mobile/web gateway used by the Firstrade app. Authentication uses a session-based flow with cookie tokens (ftat, sid) obtained after login. All requests require the Accept-Encoding: gzip and access-token header values documented below. Source: MaxxRK/firstrade-api (MIT licence).'
+  version: 0.1.0
+  contact:
+    name: Firstrade Customer Support
+    url: https://www.firstrade.com/support
+  license:
+    name: MIT (community SDK)
+    url: https://opensource.org/licenses/MIT
+  x-official: false
+  x-source-repo: https://github.com/MaxxRK/firstrade-api
+servers:
+- url: https://api3x.firstrade.com
+  description: Firstrade mobile / web API gateway
+tags:
+- name: Account
+  description: Account list, balances, positions, and history
+paths:
+  /private/userinfo:
+    get:
+      operationId: getUserInfo
+      summary: Get user information
+      description: Returns profile details for the authenticated user.
+      tags:
+      - Account
+      security:
+      - sessionAuth: []
+      responses:
+        '200':
+          description: User information object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /private/acct_list:
+    get:
+      operationId: getAccountList
+      summary: List all accounts
+      description: Returns all accounts associated with the authenticated user including account numbers and total portfolio values.
+      tags:
+      - Account
+      security:
+      - sessionAuth: []
+      responses:
+        '200':
+          description: Account list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountListResponse'
+  /private/balances:
+    get:
+      operationId: getAccountBalances
+      summary: Get account balances
+      description: Returns detailed balance information for a specific account including cash, buying power, equity, and margin values.
+      tags:
+      - Account
+      security:
+      - sessionAuth: []
+      parameters:
+      - name: account
+        in: query
+        required: true
+        description: Account number
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Account balances
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /private/positions:
+    get:
+      operationId: getAccountPositions
+      summary: Get account positions
+      description: Returns currently held positions for the specified account.
+      tags:
+      - Account
+      security:
+      - sessionAuth: []
+      parameters:
+      - name: account
+        in: query
+        required: true
+        description: Account number
+        schema:
+          type: string
+      - name: per_page
+        in: query
+        required: false
+        description: Number of positions per page (default 200)
+        schema:
+          type: integer
+          default: 200
+      responses:
+        '200':
+          description: Account positions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /private/account_history:
+    get:
+      operationId: getAccountHistory
+      summary: Get account history
+      description: Returns transaction history for the specified account. Supports predefined date ranges and custom date ranges.
+      tags:
+      - Account
+      security:
+      - sessionAuth: []
+      parameters:
+      - name: account
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Account number
+      - name: range
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - today
+          - 1w
+          - 1m
+          - 2m
+          - mtd
+          - ytd
+          - ly
+          - cust
+        description: Date range preset
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1000
+      - name: range_arr[]
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Start date (YYYY-MM-DD) when range=cust; provide twice for start and end
+      responses:
+        '200':
+          description: Account history
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Empty string on success; error message on failure
+          example: ''
+      additionalProperties: true
+    AccountListResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              account:
+                type: string
+                description: Account number
+              total_value:
+                type: string
+                description: Total portfolio value
+  securitySchemes:
+    sessionAuth:
+      type: apiKey
+      in: header
+      name: ftat
+      description: 'Session token obtained after login. The ftat header must be accompanied by a sid header (session ID) and the static access-token header (value: 833w3XuIFycv18ybi).'

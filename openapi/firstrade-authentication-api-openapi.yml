@@ -1,0 +1,185 @@
+openapi: 3.0.3
+info:
+  title: Firstrade Unofficial Account Authentication API
+  description: 'Community-reverse-engineered REST API for the Firstrade Securities brokerage platform (https://www.firstrade.com). This is NOT an official Firstrade API. Endpoints are discovered from network traffic analysis and are subject to change without notice. The base URL is the internal mobile/web gateway used by the Firstrade app. Authentication uses a session-based flow with cookie tokens (ftat, sid) obtained after login. All requests require the Accept-Encoding: gzip and access-token header values documented below. Source: MaxxRK/firstrade-api (MIT licence).'
+  version: 0.1.0
+  contact:
+    name: Firstrade Customer Support
+    url: https://www.firstrade.com/support
+  license:
+    name: MIT (community SDK)
+    url: https://opensource.org/licenses/MIT
+  x-official: false
+  x-source-repo: https://github.com/MaxxRK/firstrade-api
+servers:
+- url: https://api3x.firstrade.com
+  description: Firstrade mobile / web API gateway
+tags:
+- name: Authentication
+  description: Session login and MFA flows
+paths:
+  /:
+    get:
+      operationId: initSession
+      summary: Initialise session
+      description: Fetches the API root to establish an initial session and receive the ftat token that must accompany subsequent requests.
+      tags:
+      - Authentication
+      responses:
+        '200':
+          description: Session initialised
+          content:
+            application/json:
+              schema:
+                type: object
+  /sess/login:
+    post:
+      operationId: login
+      summary: Login to Firstrade
+      description: Authenticates a user with username and password. On success returns a session ID (sid) and optionally an ftat cookie. When MFA is required the response includes a t_token and mfa/otp details.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - username
+              - password
+              properties:
+                username:
+                  type: string
+                  description: Firstrade account username
+                password:
+                  type: string
+                  format: password
+                  description: Firstrade account password
+      responses:
+        '200':
+          description: Login response (may require MFA step)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Invalid credentials
+  /sess/request_code:
+    post:
+      operationId: requestMfaCode
+      summary: Request OTP code via email or SMS
+      description: Triggers delivery of a one-time passcode to the user's registered email or phone number. Used when email/phone MFA is required.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - recipientId
+              - t_token
+              properties:
+                recipientId:
+                  type: string
+                  description: OTP recipient ID returned by the login call
+                t_token:
+                  type: string
+                  description: Temporary token from the login response
+      responses:
+        '200':
+          description: Code dispatched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /sess/verify_pin:
+    post:
+      operationId: verifyPin
+      summary: Verify MFA code or PIN
+      description: Submits an MFA code (TOTP, PIN, or OTP) to complete authentication. On success returns ftat and sid tokens.
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                pin:
+                  type: string
+                  description: Static PIN (if pin-based MFA)
+                mfaCode:
+                  type: string
+                  description: TOTP or MFA code
+                otpCode:
+                  type: string
+                  description: Email/SMS OTP code
+                verificationSid:
+                  type: string
+                  description: Verification SID from the request_code response
+                t_token:
+                  type: string
+                  description: Temporary token from the login response
+                remember_for:
+                  type: string
+                  enum:
+                  - '30'
+                  description: Trust this device for 30 days
+      responses:
+        '200':
+          description: MFA verified, session tokens returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Empty string on success; error message on failure
+          example: ''
+      additionalProperties: true
+    LoginResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
+      properties:
+        sid:
+          type: string
+          description: Session ID
+        ftat:
+          type: string
+          description: Session authentication token (set as header on subsequent calls)
+        t_token:
+          type: string
+          description: Temporary token used for MFA verification
+        mfa:
+          type: boolean
+          description: Whether TOTP MFA is required
+        otp:
+          type: array
+          description: OTP delivery options when email/SMS MFA is required
+          items:
+            type: object
+            properties:
+              channel:
+                type: string
+                enum:
+                - email
+                - sms
+              recipientId:
+                type: string
+              recipientMask:
+                type: string
+  securitySchemes:
+    sessionAuth:
+      type: apiKey
+      in: header
+      name: ftat
+      description: 'Session token obtained after login. The ftat header must be accompanied by a sid header (session ID) and the static access-token header (value: 833w3XuIFycv18ybi).'

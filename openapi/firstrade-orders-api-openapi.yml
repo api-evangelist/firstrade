@@ -1,0 +1,270 @@
+openapi: 3.0.3
+info:
+  title: Firstrade Unofficial Account Orders API
+  description: 'Community-reverse-engineered REST API for the Firstrade Securities brokerage platform (https://www.firstrade.com). This is NOT an official Firstrade API. Endpoints are discovered from network traffic analysis and are subject to change without notice. The base URL is the internal mobile/web gateway used by the Firstrade app. Authentication uses a session-based flow with cookie tokens (ftat, sid) obtained after login. All requests require the Accept-Encoding: gzip and access-token header values documented below. Source: MaxxRK/firstrade-api (MIT licence).'
+  version: 0.1.0
+  contact:
+    name: Firstrade Customer Support
+    url: https://www.firstrade.com/support
+  license:
+    name: MIT (community SDK)
+    url: https://opensource.org/licenses/MIT
+  x-official: false
+  x-source-repo: https://github.com/MaxxRK/firstrade-api
+servers:
+- url: https://api3x.firstrade.com
+  description: Firstrade mobile / web API gateway
+tags:
+- name: Orders
+  description: Equity and option order placement, listing, and cancellation
+paths:
+  /private/order_status:
+    get:
+      operationId: getOrders
+      summary: List orders
+      description: Returns open and recent orders for the specified account.
+      tags:
+      - Orders
+      security:
+      - sessionAuth: []
+      parameters:
+      - name: account
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Account number
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+        description: Number of orders per page (0 = all)
+      responses:
+        '200':
+          description: Order list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /private/stock_order:
+    post:
+      operationId: placeEquityOrder
+      summary: Place equity order
+      description: Places or previews a stock/ETF order. Set preview=true for dry-run validation without submitting. To confirm, re-submit with preview=false and stage=P.
+      tags:
+      - Orders
+      security:
+      - sessionAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EquityOrderRequest'
+      responses:
+        '200':
+          description: Order preview or confirmation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /private/cancel_order:
+    post:
+      operationId: cancelOrder
+      summary: Cancel an order
+      description: Cancels an existing open order by order ID.
+      tags:
+      - Orders
+      security:
+      - sessionAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - order_id
+              properties:
+                order_id:
+                  type: string
+                  description: The ID of the order to cancel
+      responses:
+        '200':
+          description: Cancellation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /private/option_order:
+    post:
+      operationId: placeOptionOrder
+      summary: Place option order
+      description: Places or previews an options contract order. Set preview=true for dry-run validation. Re-submit with preview=false to confirm.
+      tags:
+      - Orders
+      security:
+      - sessionAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/OptionOrderRequest'
+      responses:
+        '200':
+          description: Option order preview or confirmation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    EquityOrderRequest:
+      type: object
+      required:
+      - symbol
+      - transaction
+      - price_type
+      - duration
+      - account
+      properties:
+        symbol:
+          type: string
+          description: Ticker symbol
+        transaction:
+          type: string
+          enum:
+          - B
+          - S
+          - SS
+          - BC
+          description: 'Order side: B=Buy, S=Sell, SS=Sell Short, BC=Buy to Cover'
+        price_type:
+          type: string
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          description: 1=Market, 2=Limit, 3=Stop, 4=Stop Limit, 5=Trailing Stop ($), 6=Trailing Stop (%)
+        duration:
+          type: string
+          enum:
+          - '0'
+          - D
+          - N
+          - '1'
+          description: 0=Day (9:30-4 ET), D=Day Extended (8-8 ET), N=Overnight (8PM-4AM ET), 1=GT90
+        account:
+          type: string
+          description: Account number
+        shares:
+          type: integer
+          description: Number of shares (omit for notional orders)
+        dollar_amount:
+          type: number
+          description: Dollar amount for notional/fractional orders
+        limit_price:
+          type: number
+          description: Limit price (required for Limit and Stop Limit orders)
+        stop_price:
+          type: number
+          description: Stop price (required for Stop and Stop Limit orders)
+        instructions:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          - '4'
+          - '5'
+          description: 0=None, 1=All-or-None, 4=At the Open, 5=At the Close
+        preview:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          default: 'true'
+          description: true=dry-run validation; false=submit order
+        stage:
+          type: string
+          enum:
+          - P
+          description: Set to P when confirming a previewed order
+    ApiResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Empty string on success; error message on failure
+          example: ''
+      additionalProperties: true
+    OptionOrderRequest:
+      type: object
+      required:
+      - symbol
+      - transaction
+      - price_type
+      - duration
+      - contracts
+      - account
+      properties:
+        symbol:
+          type: string
+          description: OCC option symbol
+        transaction:
+          type: string
+          enum:
+          - BO
+          - SO
+          description: BO=Buy Option, SO=Sell Option
+        price_type:
+          type: string
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          description: 1=Market, 2=Limit, 3=Stop, 4=Stop Limit, 5=Trailing Stop ($), 6=Trailing Stop (%)
+        duration:
+          type: string
+          enum:
+          - '0'
+          - D
+          - N
+          - '1'
+        contracts:
+          type: integer
+          description: Number of option contracts
+        account:
+          type: string
+        limit_price:
+          type: number
+          description: Limit price (required for Limit and Stop Limit orders)
+        stop_price:
+          type: number
+          description: Stop price (required for Stop and Stop Limit orders)
+        instructions:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          - '4'
+          - '5'
+        preview:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          default: 'true'
+  securitySchemes:
+    sessionAuth:
+      type: apiKey
+      in: header
+      name: ftat
+      description: 'Session token obtained after login. The ftat header must be accompanied by a sid header (session ID) and the static access-token header (value: 833w3XuIFycv18ybi).'

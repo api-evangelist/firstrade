@@ -1,0 +1,287 @@
+openapi: 3.0.3
+info:
+  title: Firstrade Unofficial Account Market Data API
+  description: 'Community-reverse-engineered REST API for the Firstrade Securities brokerage platform (https://www.firstrade.com). This is NOT an official Firstrade API. Endpoints are discovered from network traffic analysis and are subject to change without notice. The base URL is the internal mobile/web gateway used by the Firstrade app. Authentication uses a session-based flow with cookie tokens (ftat, sid) obtained after login. All requests require the Accept-Encoding: gzip and access-token header values documented below. Source: MaxxRK/firstrade-api (MIT licence).'
+  version: 0.1.0
+  contact:
+    name: Firstrade Customer Support
+    url: https://www.firstrade.com/support
+  license:
+    name: MIT (community SDK)
+    url: https://opensource.org/licenses/MIT
+  x-official: false
+  x-source-repo: https://github.com/MaxxRK/firstrade-api
+servers:
+- url: https://api3x.firstrade.com
+  description: Firstrade mobile / web API gateway
+tags:
+- name: Market Data
+  description: Stock quotes, OHLC chart data, and option chains
+paths:
+  /private/greekoptions/analytical:
+    post:
+      operationId: getGreekOptions
+      summary: Get options Greeks
+      description: Returns delta, gamma, theta, vega, and rho for an option chain.
+      tags:
+      - Market Data
+      security:
+      - sessionAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - type
+              - root_symbol
+              - exp_date
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - chain
+                  default: chain
+                chains_range:
+                  type: string
+                  enum:
+                  - A
+                  default: A
+                  description: A = all strikes
+                root_symbol:
+                  type: string
+                  description: Underlying ticker symbol
+                exp_date:
+                  type: string
+                  description: Expiration date (YYYYMMDD)
+      responses:
+        '200':
+          description: Greeks data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /public/quote:
+    get:
+      operationId: getQuote
+      summary: Get stock quote
+      description: Returns real-time or delayed bid/ask, last price, volume, OHLC, and company metadata for a ticker symbol.
+      tags:
+      - Market Data
+      security:
+      - sessionAuth: []
+      parameters:
+      - name: account
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Account number (required for authentication context)
+      - name: q
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Ticker symbol (e.g. AAPL)
+      responses:
+        '200':
+          description: Stock quote
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteResponse'
+  /public/ohlc:
+    get:
+      operationId: getOHLC
+      summary: Get OHLC chart data
+      description: Returns open-high-low-close and volume time-series data for charting. Timestamps are Unix milliseconds.
+      tags:
+      - Market Data
+      parameters:
+      - name: symbol
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Ticker symbol
+      - name: range
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - 24h
+          - 1d
+          - 1w
+          - 1m
+          - 1y
+        description: Time range for the OHLC data
+      - name: _v
+        in: query
+        required: false
+        schema:
+          type: string
+          default: v2
+        description: API version parameter
+      responses:
+        '200':
+          description: OHLC data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OHLCResponse'
+  /public/oc:
+    get:
+      operationId: getOptionData
+      summary: Get option chain data
+      description: Returns option expiration dates (m=get_exp_dates) or full option chain quotes (m=get_oc) for a given underlying symbol and expiration date.
+      tags:
+      - Market Data
+      parameters:
+      - name: m
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - get_exp_dates
+          - get_oc
+        description: Operation mode
+      - name: root_symbol
+        in: query
+        required: true
+        schema:
+          type: string
+        description: Underlying ticker symbol
+      - name: exp_date
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Expiration date (required for m=get_oc), format YYYYMMDD
+      - name: chains_range
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - A
+          default: A
+        description: A = all strikes
+      responses:
+        '200':
+          description: Option dates or chain data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    OHLCResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
+      properties:
+        result:
+          type: object
+          properties:
+            startOfDay:
+              type: integer
+              description: Unix timestamp (ms) for the start of the trading day
+            ohlc:
+              type: array
+              description: Array of [timestamp_ms, open, high, low, close] candles
+              items:
+                type: array
+                items:
+                  type: number
+            vol:
+              type: array
+              description: Array of [timestamp_ms, volume] pairs
+              items:
+                type: array
+                items:
+                  type: number
+    ApiResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Empty string on success; error message on failure
+          example: ''
+      additionalProperties: true
+    QuoteResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
+      properties:
+        result:
+          type: object
+          properties:
+            symbol:
+              type: string
+            sec_type:
+              type: string
+              description: Security type
+            tick:
+              type: string
+            bid:
+              type: string
+            bid_size:
+              type: string
+            ask:
+              type: string
+            ask_size:
+              type: string
+            last:
+              type: string
+              description: Last traded price
+            change:
+              type: string
+            high:
+              type: string
+            low:
+              type: string
+            open:
+              type: string
+            today_close:
+              type: number
+            vol:
+              type: string
+              description: Trading volume
+            quote_time:
+              type: string
+            last_trade_time:
+              type: string
+            company_name:
+              type: string
+            exchange:
+              type: string
+            has_option:
+              type: string
+            is_etf:
+              type: boolean
+            is_fractional:
+              type: boolean
+            realtime:
+              type: string
+            nls:
+              type: string
+              description: Nasdaq last sale indicator
+            shares:
+              type: string
+            bid_mmid:
+              type: string
+            ask_mmid:
+              type: string
+            last_mmid:
+              type: string
+            last_size:
+              type: integer
+            change_color:
+              type: string
+  securitySchemes:
+    sessionAuth:
+      type: apiKey
+      in: header
+      name: ftat
+      description: 'Session token obtained after login. The ftat header must be accompanied by a sid header (session ID) and the static access-token header (value: 833w3XuIFycv18ybi).'
