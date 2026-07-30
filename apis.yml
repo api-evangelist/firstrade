@@ -9,7 +9,20 @@ description: >-
   transaction history, investment holdings, and asset reports for Firstrade
   accounts. Community-developed unofficial Python SDKs also exist for session-
   based automation but are not affiliated with or endorsed by Firstrade.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: open
+  trial: false
+  try_now: true
+  public: true
+  label: Freemium · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/firstrade.png
 url: https://raw.githubusercontent.com/api-evangelist/firstrade/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -29,49 +42,100 @@ tags:
   - Finance
   - Open Banking
 apis:
-  - name: Firstrade Account Data API (via Plaid)
-    description: >-
-      Access to Firstrade account data is available through the Plaid financial
-      data aggregation platform. Plaid supports four product categories for
-      Firstrade: Assets (consolidated balance summaries and asset reports),
-      Balance (current and available account balances), Transactions (up to
-      24 months of transaction history), and Investments (retirement, brokerage,
-      and crypto holdings). Authentication is handled via Plaid Link — Firstrade
-      customers connect their accounts through Plaid's consent-based flow. Data
-      is returned in JSON format through Plaid's standard endpoints. Geographic
-      coverage is United States only.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://plaid.com/institutions/firstrade/
-    baseURL: https://production.plaid.com
-    tags:
-      - Account Data
-      - Balance
-      - Transactions
-      - Investments
-      - Assets
-      - Open Banking
-      - Plaid
-    properties:
-      - type: Documentation
-        url: https://plaid.com/institutions/firstrade/
-      - type: APIReference
-        url: https://plaid.com/docs/api/
-      - type: Authentication
-        url: https://plaid.com/docs/link/
-      - type: TermsOfService
-        url: https://www.firstrade.com/content/en-us/aboutus/privacypolicy
-      - type: PrivacyPolicy
-        url: https://www.firstrade.com/content/en-us/aboutus/privacypolicy
-      - type: Plans
-        url: https://raw.githubusercontent.com/api-evangelist/firstrade/refs/heads/main/plans/plans.yml
-      - type: RateLimits
-        url: https://raw.githubusercontent.com/api-evangelist/firstrade/refs/heads/main/rate-limits/rate-limits.yml
-      - type: FinOps
-        url: https://raw.githubusercontent.com/api-evangelist/firstrade/refs/heads/main/finops/finops.yml
-    contact:
-      - FN: Firstrade Customer Support
-        url: https://www.firstrade.com/support
-        phone: 1-800-869-8800
+- name: Firstrade Account Data API (via Plaid)
+  description: >-
+    Access to Firstrade account data is available through the Plaid financial data aggregation platform.
+    Plaid supports four product categories for Firstrade: Assets (consolidated balance summaries and asset
+    reports), Balance (current and available account balances), Transactions (up to 24 months of transaction
+    history), and Investments (retirement, brokerage, and crypto holdings). Authentication is handled
+    via Plaid Link — Firstrade customers connect their accounts through Plaid's consent-based flow. Data
+    is returned in JSON format through Plaid's standard endpoints. Geographic coverage is United States
+    only.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://plaid.com/institutions/firstrade/
+  baseURL: https://production.plaid.com
+  tags:
+  - Account Data
+  - Balance
+  - Transactions
+  - Investments
+  - Assets
+  - Open Banking
+  - Plaid
+  properties:
+  - type: Documentation
+    url: https://plaid.com/institutions/firstrade/
+  - type: APIReference
+    url: https://plaid.com/docs/api/
+  - type: Authentication
+    url: https://plaid.com/docs/link/
+  - type: TermsOfService
+    url: https://www.firstrade.com/content/en-us/aboutus/privacypolicy
+  - type: PrivacyPolicy
+    url: https://www.firstrade.com/content/en-us/aboutus/privacypolicy
+  - type: Plans
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/firstrade/refs/heads/main/plans/plans.yml
+  - type: RateLimits
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/firstrade/refs/heads/main/rate-limits/rate-limits.yml
+  - type: FinOps
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/firstrade/refs/heads/main/finops/finops.yml
+  contact:
+  - FN: Firstrade Customer Support
+    url: https://www.firstrade.com/support
+    phone: 1-800-869-8800
+- aid: firstrade:firstrade-account-api
+  name: Firstrade Account API
+  description: Account list, balances, positions, and history
+  humanURL: https://plaid.com/institutions/firstrade/
+  baseURL: https://production.plaid.com
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/firstrade-account-api-openapi.yml
+- aid: firstrade:firstrade-authentication-api
+  name: Firstrade Authentication API
+  description: Session login and MFA flows
+  humanURL: https://plaid.com/institutions/firstrade/
+  baseURL: https://production.plaid.com
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/firstrade-authentication-api-openapi.yml
+- aid: firstrade:firstrade-market-data-api
+  name: Firstrade Market Data API
+  description: Stock quotes, OHLC chart data, and option chains
+  humanURL: https://plaid.com/institutions/firstrade/
+  baseURL: https://production.plaid.com
+  tags:
+  - Market Data
+  properties:
+  - type: OpenAPI
+    url: openapi/firstrade-market-data-api-openapi.yml
+- aid: firstrade:firstrade-orders-api
+  name: Firstrade Orders API
+  description: Equity and option order placement, listing, and cancellation
+  humanURL: https://plaid.com/institutions/firstrade/
+  baseURL: https://production.plaid.com
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/firstrade-orders-api-openapi.yml
+- aid: firstrade:firstrade-watchlist-api
+  name: Firstrade Watchlist API
+  description: Watchlist CRUD operations
+  humanURL: https://plaid.com/institutions/firstrade/
+  baseURL: https://production.plaid.com
+  tags:
+  - Watchlist
+  properties:
+  - type: OpenAPI
+    url: openapi/firstrade-watchlist-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/firstrade-agentic-access.yml
