@@ -1,0 +1,22 @@
+{
+  "provider": "firstrade",
+  "sources": [
+    "firstrade-account-api-openapi.yml",
+    "firstrade-authentication-api-openapi.yml",
+    "firstrade-market-data-api-openapi.yml",
+    "firstrade-orders-api-openapi.yml",
+    "firstrade-watchlist-api-openapi.yml"
+  ],
+  "outputs": [
+    "firstrade-account-api-openapi.yml",
+    "firstrade-authentication-api-openapi.yml",
+    "firstrade-market-data-api-openapi.yml",
+    "firstrade-orders-api-openapi.yml",
+    "firstrade-watchlist-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
