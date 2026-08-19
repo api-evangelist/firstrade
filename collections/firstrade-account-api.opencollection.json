@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Firstrade Unofficial Account API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get user information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api3x.firstrade.com/private/userinfo",
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns profile details for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "List all accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api3x.firstrade.com/private/acct_list",
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns all accounts associated with the authenticated user including account numbers and total portfolio values."
+        },
+        {
+          "info": {
+            "name": "Get account balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api3x.firstrade.com/private/balances",
+            "params": [
+              {
+                "name": "account",
+                "value": "",
+                "type": "query",
+                "description": "Account number"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns detailed balance information for a specific account including cash, buying power, equity, and margin values."
+        },
+        {
+          "info": {
+            "name": "Get account positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api3x.firstrade.com/private/positions",
+            "params": [
+              {
+                "name": "account",
+                "value": "",
+                "type": "query",
+                "description": "Account number"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of positions per page (default 200)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns currently held positions for the specified account."
+        },
+        {
+          "info": {
+            "name": "Get account history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api3x.firstrade.com/private/account_history",
+            "params": [
+              {
+                "name": "account",
+                "value": "",
+                "type": "query",
+                "description": "Account number"
+              },
+              {
+                "name": "range",
+                "value": "",
+                "type": "query",
+                "description": "Date range preset"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "range_arr[]",
+                "value": "",
+                "type": "query",
+                "description": "Start date (YYYY-MM-DD) when range=cust; provide twice for start and end"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns transaction history for the specified account. Supports predefined date ranges and custom date ranges."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

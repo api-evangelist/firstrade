@@ -1,0 +1,539 @@
+{
+  "item": [
+    {
+      "id": "a33a14b1-ec0e-472b-82e4-80dadbab9824",
+      "name": "Market Data",
+      "description": {
+        "content": "Stock quotes, OHLC chart data, and option chains",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "10072ee6-0389-43a9-801c-788977340548",
+          "name": "Get options Greeks",
+          "request": {
+            "name": "Get options Greeks",
+            "description": {
+              "content": "Returns delta, gamma, theta, vega, and rho for an option chain.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "private",
+                "greekoptions",
+                "analytical"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "ftat"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "chain",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "root_symbol",
+                  "value": "<string>",
+                  "description": "(Required) Underlying ticker symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "exp_date",
+                  "value": "<string>",
+                  "description": "(Required) Expiration date (YYYYMMDD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "chains_range",
+                  "value": "A",
+                  "description": "A = all strikes"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ccfb9f29-8651-4a0f-8b96-a3147a7aab51",
+              "name": "Greeks data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "private",
+                    "greekoptions",
+                    "analytical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ftat",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "chain"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Underlying ticker symbol",
+                        "type": "text/plain"
+                      },
+                      "key": "root_symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Expiration date (YYYYMMDD)",
+                        "type": "text/plain"
+                      },
+                      "key": "exp_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "A = all strikes",
+                        "type": "text/plain"
+                      },
+                      "key": "chains_range",
+                      "value": "A"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"\",\n  \"key_0\": 4478.24713275884\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2665b1ff-9652-44cb-9b1e-830b56d7f4c6",
+          "name": "Get stock quote",
+          "request": {
+            "name": "Get stock quote",
+            "description": {
+              "content": "Returns real-time or delayed bid/ask, last price, volume, OHLC, and company metadata for a ticker symbol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "quote"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "account",
+                  "value": "<string>",
+                  "description": "(Required) Account number (required for authentication context)"
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) Ticker symbol (e.g. AAPL)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "ftat"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cd32bdfb-10b0-4439-9eac-a633b63a1cec",
+              "name": "Stock quote",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "quote"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "account",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ftat",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"symbol\": \"string\",\n    \"sec_type\": \"string\",\n    \"tick\": \"string\",\n    \"bid\": \"string\",\n    \"bid_size\": \"string\",\n    \"ask\": \"string\",\n    \"ask_size\": \"string\",\n    \"last\": \"string\",\n    \"change\": \"string\",\n    \"high\": \"string\",\n    \"low\": \"string\",\n    \"open\": \"string\",\n    \"today_close\": 3377.1858361227205,\n    \"vol\": \"string\",\n    \"quote_time\": \"string\",\n    \"last_trade_time\": \"string\",\n    \"company_name\": \"string\",\n    \"exchange\": \"string\",\n    \"has_option\": \"string\",\n    \"is_etf\": true,\n    \"is_fractional\": false,\n    \"realtime\": \"string\",\n    \"nls\": \"string\",\n    \"shares\": \"string\",\n    \"bid_mmid\": \"string\",\n    \"ask_mmid\": \"string\",\n    \"last_mmid\": \"string\",\n    \"last_size\": 4421,\n    \"change_color\": \"string\"\n  },\n  \"error\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "265643d8-9f0f-4718-b8f2-0e6ee0ab67a5",
+          "name": "Get OHLC chart data",
+          "request": {
+            "name": "Get OHLC chart data",
+            "description": {
+              "content": "Returns open-high-low-close and volume time-series data for charting. Timestamps are Unix milliseconds.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "ohlc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "symbol",
+                  "value": "<string>",
+                  "description": "(Required) Ticker symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "range",
+                  "value": "<string>",
+                  "description": "(Required) Time range for the OHLC data"
+                },
+                {
+                  "disabled": false,
+                  "key": "_v",
+                  "value": "v2",
+                  "description": "API version parameter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7da8bb4-11dd-4fa8-8904-d5ea33323198",
+              "name": "OHLC data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "ohlc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "range",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_v",
+                      "value": "v2"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"startOfDay\": 975,\n    \"ohlc\": [\n      [\n        7978.737911097329,\n        5869.154253142591\n      ],\n      [\n        3285.8345728920967,\n        3621.8819086903377\n      ]\n    ],\n    \"vol\": [\n      [\n        6584.63106931108,\n        7163.5719141674745\n      ],\n      [\n        8112.719361137072,\n        438.21541781639775\n      ]\n    ]\n  },\n  \"error\": \"\",\n  \"key_0\": \"string\",\n  \"key_1\": false,\n  \"key_2\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e338c8e4-c278-4c8a-9cb5-f89d4063bf9c",
+          "name": "Get option chain data",
+          "request": {
+            "name": "Get option chain data",
+            "description": {
+              "content": "Returns option expiration dates (m=get_exp_dates) or full option chain quotes (m=get_oc) for a given underlying symbol and expiration date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "public",
+                "oc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "m",
+                  "value": "<string>",
+                  "description": "(Required) Operation mode"
+                },
+                {
+                  "disabled": false,
+                  "key": "root_symbol",
+                  "value": "<string>",
+                  "description": "(Required) Underlying ticker symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "exp_date",
+                  "value": "<string>",
+                  "description": "Expiration date (required for m=get_oc), format YYYYMMDD"
+                },
+                {
+                  "disabled": false,
+                  "key": "chains_range",
+                  "value": "A",
+                  "description": "A = all strikes"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04432c5c-c0bc-49c9-bd7f-89d4091a365c",
+              "name": "Option dates or chain data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "oc"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "m",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "root_symbol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exp_date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "chains_range",
+                      "value": "A"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"\",\n  \"key_0\": 4478.24713275884\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api3x.firstrade.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cb4afa24-90f0-4908-91e2-243119fea33b",
+    "name": "Firstrade Unofficial Account Market Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Community-reverse-engineered REST API for the Firstrade Securities brokerage platform (https://www.firstrade.com). This is NOT an official Firstrade API. Endpoints are discovered from network traffic analysis and are subject to change without notice. The base URL is the internal mobile/web gateway used by the Firstrade app. Authentication uses a session-based flow with cookie tokens (ftat, sid) obtained after login. All requests require the Accept-Encoding: gzip and access-token header values documented below. Source: MaxxRK/firstrade-api (MIT licence).\n\nContact Support:\n Name: Firstrade Customer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Firstrade Unofficial Account Authentication API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Initialise session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api3x.firstrade.com/"
+          },
+          "docs": "Fetches the API root to establish an initial session and receive the ftat token that must accompany subsequent requests."
+        },
+        {
+          "info": {
+            "name": "Login to Firstrade",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api3x.firstrade.com/sess/login",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "username",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Authenticates a user with username and password. On success returns a session ID (sid) and optionally an ftat cookie. When MFA is required the response includes a t_token and mfa/otp details."
+        },
+        {
+          "info": {
+            "name": "Request OTP code via email or SMS",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api3x.firstrade.com/sess/request_code",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "recipientId",
+                  "value": ""
+                },
+                {
+                  "name": "t_token",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Triggers delivery of a one-time passcode to the user's registered email or phone number. Used when email/phone MFA is required."
+        },
+        {
+          "info": {
+            "name": "Verify MFA code or PIN",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api3x.firstrade.com/sess/verify_pin",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "pin",
+                  "value": ""
+                },
+                {
+                  "name": "mfaCode",
+                  "value": ""
+                },
+                {
+                  "name": "otpCode",
+                  "value": ""
+                },
+                {
+                  "name": "verificationSid",
+                  "value": ""
+                },
+                {
+                  "name": "t_token",
+                  "value": ""
+                },
+                {
+                  "name": "remember_for",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submits an MFA code (TOTP, PIN, or OTP) to complete authentication. On success returns ftat and sid tokens."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

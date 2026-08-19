@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Firstrade Unofficial Account Orders API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api3x.firstrade.com/private/order_status",
+            "params": [
+              {
+                "name": "account",
+                "value": "",
+                "type": "query",
+                "description": "Account number"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of orders per page (0 = all)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns open and recent orders for the specified account."
+        },
+        {
+          "info": {
+            "name": "Place equity order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api3x.firstrade.com/private/stock_order",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Places or previews a stock/ETF order. Set preview=true for dry-run validation without submitting. To confirm, re-submit with preview=false and stage=P."
+        },
+        {
+          "info": {
+            "name": "Cancel an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api3x.firstrade.com/private/cancel_order",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "order_id",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Cancels an existing open order by order ID."
+        },
+        {
+          "info": {
+            "name": "Place option order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api3x.firstrade.com/private/option_order",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Places or previews an options contract order. Set preview=true for dry-run validation. Re-submit with preview=false to confirm."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

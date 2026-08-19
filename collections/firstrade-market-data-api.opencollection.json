@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Firstrade Unofficial Account Market Data API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Market Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get options Greeks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api3x.firstrade.com/private/greekoptions/analytical",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "type",
+                  "value": ""
+                },
+                {
+                  "name": "chains_range",
+                  "value": ""
+                },
+                {
+                  "name": "root_symbol",
+                  "value": ""
+                },
+                {
+                  "name": "exp_date",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns delta, gamma, theta, vega, and rho for an option chain."
+        },
+        {
+          "info": {
+            "name": "Get stock quote",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api3x.firstrade.com/public/quote",
+            "params": [
+              {
+                "name": "account",
+                "value": "",
+                "type": "query",
+                "description": "Account number (required for authentication context)"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Ticker symbol (e.g. AAPL)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns real-time or delayed bid/ask, last price, volume, OHLC, and company metadata for a ticker symbol."
+        },
+        {
+          "info": {
+            "name": "Get OHLC chart data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api3x.firstrade.com/public/ohlc",
+            "params": [
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Ticker symbol"
+              },
+              {
+                "name": "range",
+                "value": "",
+                "type": "query",
+                "description": "Time range for the OHLC data"
+              },
+              {
+                "name": "_v",
+                "value": "",
+                "type": "query",
+                "description": "API version parameter"
+              }
+            ]
+          },
+          "docs": "Returns open-high-low-close and volume time-series data for charting. Timestamps are Unix milliseconds."
+        },
+        {
+          "info": {
+            "name": "Get option chain data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api3x.firstrade.com/public/oc",
+            "params": [
+              {
+                "name": "m",
+                "value": "",
+                "type": "query",
+                "description": "Operation mode"
+              },
+              {
+                "name": "root_symbol",
+                "value": "",
+                "type": "query",
+                "description": "Underlying ticker symbol"
+              },
+              {
+                "name": "exp_date",
+                "value": "",
+                "type": "query",
+                "description": "Expiration date (required for m=get_oc), format YYYYMMDD"
+              },
+              {
+                "name": "chains_range",
+                "value": "",
+                "type": "query",
+                "description": "A = all strikes"
+              }
+            ]
+          },
+          "docs": "Returns option expiration dates (m=get_exp_dates) or full option chain quotes (m=get_oc) for a given underlying symbol and expiration date."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

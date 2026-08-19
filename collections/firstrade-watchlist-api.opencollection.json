@@ -1,0 +1,187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Firstrade Unofficial Account Watchlist API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Watchlist",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all watchlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api3x.firstrade.com/private/watchlists",
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns all watchlists for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Create a watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api3x.firstrade.com/private/watchlists",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "name",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Creates a new watchlist."
+        },
+        {
+          "info": {
+            "name": "Get a watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api3x.firstrade.com/private/watchlists/:list_id",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "Watchlist ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a single watchlist by ID."
+        },
+        {
+          "info": {
+            "name": "Delete a watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api3x.firstrade.com/private/watchlists/:list_id",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "Watchlist ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deletes the specified watchlist."
+        },
+        {
+          "info": {
+            "name": "Get all watchlist items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api3x.firstrade.com/private/all_watchlist_items",
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns every symbol across all watchlists for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Add symbol to watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api3x.firstrade.com/private/watchlist/:list_id",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "Watchlist ID"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "symbol",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Adds a ticker symbol to the specified watchlist."
+        },
+        {
+          "info": {
+            "name": "Delete a watchlist item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api3x.firstrade.com/private/watchlist/:list_id",
+            "params": [
+              {
+                "name": "list_id",
+                "value": "",
+                "type": "path",
+                "description": "Watchlist item ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "ftat",
+              "value": "{{ftat}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Removes a symbol from the specified watchlist."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,559 @@
+{
+  "item": [
+    {
+      "id": "49416c5b-c335-4a34-9f7e-013091599acb",
+      "name": "Authentication",
+      "description": {
+        "content": "Session login and MFA flows",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a4ec88cd-90a9-4d3c-b992-0c7c0c6c3702",
+          "name": "Initialise session",
+          "request": {
+            "name": "Initialise session",
+            "description": {
+              "content": "Fetches the API root to establish an initial session and receive the ftat token that must accompany subsequent requests.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3f78912-649c-4b74-9458-44425f835f26",
+              "name": "Session initialised",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cce29122-7a93-4008-9dd7-16c629dae233",
+          "name": "Login to Firstrade",
+          "request": {
+            "name": "Login to Firstrade",
+            "description": {
+              "content": "Authenticates a user with username and password. On success returns a session ID (sid) and optionally an ftat cookie. When MFA is required the response includes a t_token and mfa/otp details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sess",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "username",
+                  "value": "<string>",
+                  "description": "(Required) Firstrade account username"
+                },
+                {
+                  "disabled": false,
+                  "key": "password",
+                  "value": "<password>",
+                  "description": "(Required) Firstrade account password"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5b159dfe-aef6-431f-9a42-217a9cf2a49e",
+              "name": "Login response (may require MFA step)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sess",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Firstrade account username",
+                        "type": "text/plain"
+                      },
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Firstrade account password",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<password>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sid\": \"string\",\n  \"ftat\": \"string\",\n  \"t_token\": \"string\",\n  \"mfa\": true,\n  \"otp\": [\n    {\n      \"channel\": \"sms\",\n      \"recipientId\": \"string\",\n      \"recipientMask\": \"string\"\n    },\n    {\n      \"channel\": \"email\",\n      \"recipientId\": \"string\",\n      \"recipientMask\": \"string\"\n    }\n  ],\n  \"error\": \"\",\n  \"key_0\": 8356.305909214116\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4845f00-2508-4b7a-914f-c490516b8493",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sess",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Firstrade account username",
+                        "type": "text/plain"
+                      },
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Firstrade account password",
+                        "type": "text/plain"
+                      },
+                      "key": "password",
+                      "value": "<password>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31c90262-b895-4fcf-9501-21c32767df7f",
+          "name": "Request OTP code via email or SMS",
+          "request": {
+            "name": "Request OTP code via email or SMS",
+            "description": {
+              "content": "Triggers delivery of a one-time passcode to the user's registered email or phone number. Used when email/phone MFA is required.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sess",
+                "request_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "recipientId",
+                  "value": "<string>",
+                  "description": "(Required) OTP recipient ID returned by the login call"
+                },
+                {
+                  "disabled": false,
+                  "key": "t_token",
+                  "value": "<string>",
+                  "description": "(Required) Temporary token from the login response"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d4d5fd87-53bb-494f-860b-3eba7d5bf321",
+              "name": "Code dispatched",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sess",
+                    "request_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) OTP recipient ID returned by the login call",
+                        "type": "text/plain"
+                      },
+                      "key": "recipientId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Temporary token from the login response",
+                        "type": "text/plain"
+                      },
+                      "key": "t_token",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"\",\n  \"key_0\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd6bf7c7-94ca-45f0-9214-8df46d14fc38",
+          "name": "Verify MFA code or PIN",
+          "request": {
+            "name": "Verify MFA code or PIN",
+            "description": {
+              "content": "Submits an MFA code (TOTP, PIN, or OTP) to complete authentication. On success returns ftat and sid tokens.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sess",
+                "verify_pin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "pin",
+                  "value": "<string>",
+                  "description": "Static PIN (if pin-based MFA)"
+                },
+                {
+                  "disabled": false,
+                  "key": "mfaCode",
+                  "value": "<string>",
+                  "description": "TOTP or MFA code"
+                },
+                {
+                  "disabled": false,
+                  "key": "otpCode",
+                  "value": "<string>",
+                  "description": "Email/SMS OTP code"
+                },
+                {
+                  "disabled": false,
+                  "key": "verificationSid",
+                  "value": "<string>",
+                  "description": "Verification SID from the request_code response"
+                },
+                {
+                  "disabled": false,
+                  "key": "t_token",
+                  "value": "<string>",
+                  "description": "Temporary token from the login response"
+                },
+                {
+                  "disabled": false,
+                  "key": "remember_for",
+                  "value": "<string>",
+                  "description": "Trust this device for 30 days"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cdcad7cd-4836-4d12-bbd7-89c6d78ba595",
+              "name": "MFA verified, session tokens returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sess",
+                    "verify_pin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Static PIN (if pin-based MFA)",
+                        "type": "text/plain"
+                      },
+                      "key": "pin",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "TOTP or MFA code",
+                        "type": "text/plain"
+                      },
+                      "key": "mfaCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Email/SMS OTP code",
+                        "type": "text/plain"
+                      },
+                      "key": "otpCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Verification SID from the request_code response",
+                        "type": "text/plain"
+                      },
+                      "key": "verificationSid",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Temporary token from the login response",
+                        "type": "text/plain"
+                      },
+                      "key": "t_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Trust this device for 30 days",
+                        "type": "text/plain"
+                      },
+                      "key": "remember_for",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sid\": \"string\",\n  \"ftat\": \"string\",\n  \"t_token\": \"string\",\n  \"mfa\": false,\n  \"otp\": [\n    {\n      \"channel\": \"email\",\n      \"recipientId\": \"string\",\n      \"recipientMask\": \"string\"\n    },\n    {\n      \"channel\": \"email\",\n      \"recipientId\": \"string\",\n      \"recipientMask\": \"string\"\n    }\n  ],\n  \"error\": \"\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api3x.firstrade.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1dd92061-bfc5-48b1-96d9-e8e7d7af99e2",
+    "name": "Firstrade Unofficial Account Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Community-reverse-engineered REST API for the Firstrade Securities brokerage platform (https://www.firstrade.com). This is NOT an official Firstrade API. Endpoints are discovered from network traffic analysis and are subject to change without notice. The base URL is the internal mobile/web gateway used by the Firstrade app. Authentication uses a session-based flow with cookie tokens (ftat, sid) obtained after login. All requests require the Accept-Encoding: gzip and access-token header values documented below. Source: MaxxRK/firstrade-api (MIT licence).\n\nContact Support:\n Name: Firstrade Customer Support",
+      "type": "text/plain"
+    }
+  }
+}
