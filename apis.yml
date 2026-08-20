@@ -56,6 +56,14 @@ apis:
   baseURL: https://production.plaid.com
   tags:
   - Account Data
+  - Balances
+  - Transaction
+  - Investments
+  - Assets
+  - Open Banking
+  - Plaid
+  tags_raw:
+  - Account Data
   - Balance
   - Transactions
   - Investments
@@ -122,6 +130,8 @@ apis:
   humanURL: https://plaid.com/institutions/firstrade/
   baseURL: https://production.plaid.com
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
