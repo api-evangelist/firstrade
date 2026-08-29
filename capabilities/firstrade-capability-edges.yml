@@ -1,0 +1,25 @@
+slug: firstrade
+provider: Firstrade
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Orders
+  spec_file: firstrade-orders-api-openapi.yml
+  capability_id: BC-1370.30
+  capability_id_l1: BC-1370
+  capability_name: Trading Order Management
+  confidence: 0.93
+  evidence: POST /private/stock_order  placeEquityOrder  Place equity order; POST /private/cancel_order  cancelOrder  Cancel
+    an order; GET /private/order_status  getOrders
+  reason: Operations capture, submit, query and cancel equity and option orders — plainly securities trading
+    order management.

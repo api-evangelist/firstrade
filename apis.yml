@@ -159,6 +159,9 @@ apis:
   - type: OpenAPI
     url: openapi/firstrade-watchlist-api-openapi.yml
 common:
+  - type: CapabilityMap
+    url: capabilities/firstrade-capability-edges.yml
+    name: Firstrade Business Capability Map
   - type: AgenticAccess
     url: agentic-access/firstrade-agentic-access.yml
   - type: DomainSecurity
