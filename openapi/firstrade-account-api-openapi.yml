@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Firstrade Unofficial Account API
-  description: 'Community-reverse-engineered REST API for the Firstrade Securities brokerage platform (https://www.firstrade.com). This is NOT an official Firstrade API. Endpoints are discovered from network traffic analysis and are subject to change without notice. The base URL is the internal mobile/web gateway used by the Firstrade app. Authentication uses a session-based flow with cookie tokens (ftat, sid) obtained after login. All requests require the Accept-Encoding: gzip and access-token header values documented below. Source: MaxxRK/firstrade-api (MIT licence).'
+  description: Community-reverse-engineered REST API for the Firstrade Securities brokerage platform (https://www.firstrade.com).
   version: 0.1.0
   contact:
     name: Firstrade Customer Support
@@ -161,14 +161,6 @@ paths:
                 $ref: '#/components/schemas/ApiResponse'
 components:
   schemas:
-    ApiResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Empty string on success; error message on failure
-          example: ''
-      additionalProperties: true
     AccountListResponse:
       allOf:
       - $ref: '#/components/schemas/ApiResponse'
@@ -184,6 +176,14 @@ components:
               total_value:
                 type: string
                 description: Total portfolio value
+    ApiResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Empty string on success; error message on failure
+          example: ''
+      additionalProperties: true
   securitySchemes:
     sessionAuth:
       type: apiKey
