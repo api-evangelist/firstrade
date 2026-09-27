@@ -178,14 +178,30 @@ paths:
                 $ref: '#/components/schemas/ApiResponse'
 components:
   schemas:
-    ApiResponse:
-      type: object
+    OHLCResponse:
+      allOf:
+      - $ref: '#/components/schemas/ApiResponse'
       properties:
-        error:
-          type: string
-          description: Empty string on success; error message on failure
-          example: ''
-      additionalProperties: true
+        result:
+          type: object
+          properties:
+            startOfDay:
+              type: integer
+              description: Unix timestamp (ms) for the start of the trading day
+            ohlc:
+              type: array
+              description: Array of [timestamp_ms, open, high, low, close] candles
+              items:
+                type: array
+                items:
+                  type: number
+            vol:
+              type: array
+              description: Array of [timestamp_ms, volume] pairs
+              items:
+                type: array
+                items:
+                  type: number
     QuoteResponse:
       allOf:
       - $ref: '#/components/schemas/ApiResponse'
@@ -255,30 +271,14 @@ components:
               type: integer
             change_color:
               type: string
-    OHLCResponse:
-      allOf:
-      - $ref: '#/components/schemas/ApiResponse'
+    ApiResponse:
+      type: object
       properties:
-        result:
-          type: object
-          properties:
-            startOfDay:
-              type: integer
-              description: Unix timestamp (ms) for the start of the trading day
-            ohlc:
-              type: array
-              description: Array of [timestamp_ms, open, high, low, close] candles
-              items:
-                type: array
-                items:
-                  type: number
-            vol:
-              type: array
-              description: Array of [timestamp_ms, volume] pairs
-              items:
-                type: array
-                items:
-                  type: number
+        error:
+          type: string
+          description: Empty string on success; error message on failure
+          example: ''
+      additionalProperties: true
   securitySchemes:
     sessionAuth:
       type: apiKey
