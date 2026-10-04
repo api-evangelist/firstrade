@@ -121,14 +121,66 @@ paths:
                 $ref: '#/components/schemas/ApiResponse'
 components:
   schemas:
-    ApiResponse:
+    OptionOrderRequest:
       type: object
+      required:
+      - symbol
+      - transaction
+      - price_type
+      - duration
+      - contracts
+      - account
       properties:
-        error:
+        symbol:
           type: string
-          description: Empty string on success; error message on failure
-          example: ''
-      additionalProperties: true
+          description: OCC option symbol
+        transaction:
+          type: string
+          enum:
+          - BO
+          - SO
+          description: BO=Buy Option, SO=Sell Option
+        price_type:
+          type: string
+          enum:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          description: 1=Market, 2=Limit, 3=Stop, 4=Stop Limit, 5=Trailing Stop ($), 6=Trailing Stop (%)
+        duration:
+          type: string
+          enum:
+          - '0'
+          - D
+          - N
+          - '1'
+        contracts:
+          type: integer
+          description: Number of option contracts
+        account:
+          type: string
+        limit_price:
+          type: number
+          description: Limit price (required for Limit and Stop Limit orders)
+        stop_price:
+          type: number
+          description: Stop price (required for Stop and Stop Limit orders)
+        instructions:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          - '4'
+          - '5'
+        preview:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          default: 'true'
     EquityOrderRequest:
       type: object
       required:
@@ -202,66 +254,14 @@ components:
           enum:
           - P
           description: Set to P when confirming a previewed order
-    OptionOrderRequest:
+    ApiResponse:
       type: object
-      required:
-      - symbol
-      - transaction
-      - price_type
-      - duration
-      - contracts
-      - account
       properties:
-        symbol:
+        error:
           type: string
-          description: OCC option symbol
-        transaction:
-          type: string
-          enum:
-          - BO
-          - SO
-          description: BO=Buy Option, SO=Sell Option
-        price_type:
-          type: string
-          enum:
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          - '5'
-          - '6'
-          description: 1=Market, 2=Limit, 3=Stop, 4=Stop Limit, 5=Trailing Stop ($), 6=Trailing Stop (%)
-        duration:
-          type: string
-          enum:
-          - '0'
-          - D
-          - N
-          - '1'
-        contracts:
-          type: integer
-          description: Number of option contracts
-        account:
-          type: string
-        limit_price:
-          type: number
-          description: Limit price (required for Limit and Stop Limit orders)
-        stop_price:
-          type: number
-          description: Stop price (required for Stop and Stop Limit orders)
-        instructions:
-          type: string
-          enum:
-          - '0'
-          - '1'
-          - '4'
-          - '5'
-        preview:
-          type: string
-          enum:
-          - 'true'
-          - 'false'
-          default: 'true'
+          description: Empty string on success; error message on failure
+          example: ''
+      additionalProperties: true
   securitySchemes:
     sessionAuth:
       type: apiKey
