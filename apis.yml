@@ -53,6 +53,7 @@ tags:
   - Investing
   - Finance
   - Open Banking
+  - Financial Services
 apis:
 - name: Firstrade Account Data API (via Plaid)
   description: >-
