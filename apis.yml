@@ -160,6 +160,12 @@ apis:
   - type: OpenAPI
     url: openapi/firstrade-watchlist-api-openapi.yml
 common:
+  - type: Plans
+    url: plans/plans.yml
+  - type: RateLimits
+    url: rate-limits/rate-limits.yml
+  - type: FinOps
+    url: finops/finops.yml
   - type: CapabilityMap
     url: capabilities/firstrade-capability-edges.yml
     name: Firstrade Business Capability Map
