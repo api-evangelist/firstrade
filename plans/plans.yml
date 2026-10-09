@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 plans:
   - name: Commission-Free Brokerage Account
     description: >-
@@ -42,3 +46,21 @@ plans:
       - Account owner identity data
       - Consent-based authentication via Plaid Link
       - US-only geographic coverage
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Commission-Free Brokerage Account
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Plaid Developer Access (Data Aggregation)
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
