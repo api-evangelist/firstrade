@@ -121,6 +121,14 @@ paths:
                 $ref: '#/components/schemas/ApiResponse'
 components:
   schemas:
+    ApiResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Empty string on success; error message on failure
+          example: ''
+      additionalProperties: true
     OptionOrderRequest:
       type: object
       required:
@@ -254,14 +262,6 @@ components:
           enum:
           - P
           description: Set to P when confirming a previewed order
-    ApiResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Empty string on success; error message on failure
-          example: ''
-      additionalProperties: true
   securitySchemes:
     sessionAuth:
       type: apiKey
