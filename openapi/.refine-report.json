@@ -1,28 +1,18 @@
 {
   "provider": "firstrade",
   "sources": [
-    "_original/openapi.yml"
+    "_original/firstrade-openapi.yml"
   ],
   "outputs": [
-    "firstrade-account-api-openapi.yml",
-    "firstrade-authentication-api-openapi.yml",
-    "firstrade-market-data-api-openapi.yml",
-    "firstrade-orders-api-openapi.yml",
-    "firstrade-watchlist-api-openapi.yml"
+    "firstrade-plaid-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "firstrade-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+1 apis, 2 total)"
   ],
-  "skipped": [
-    "firstrade-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "firstrade-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "firstrade-market-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "firstrade-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "firstrade-watchlist-api-openapi.yml: previously refined output, superseded by openapi/_original/"
-  ]
+  "skipped": []
 }
