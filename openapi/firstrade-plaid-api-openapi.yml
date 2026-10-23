@@ -73013,3 +73013,9 @@ components:
             transactions:read: Read Transactions data.
             issues:read: Read institution issue data.
             issues:write: Manage institution issue subscriptions.
+x-provenance:
+  method: harvested
+  publisher: Firstrade
+  source: https://raw.githubusercontent.com/plaid/plaid-openapi/master/2020-09-14.yml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
