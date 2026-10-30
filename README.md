@@ -64,45 +64,126 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Firstrade Securities is a commission-free online brokerage offering trading in stocks, ETFs, options, mutual funds, and fixed income securities with no account minimums and no inactivity fees. Founded to serve self-directed investors, Firstrade provides $0 commissions across all major asset classes including options (with $0 contract fees).
+Firstrade Securities is a commission-free online brokerage offering trading in stocks, ETFs, options, mutual funds, and fixed income securities with no account minimums and no inactivity fees. Firstrade does not publish an official public REST API; programmatic account access is available through the Plaid financial data aggregator, which supports account balance retrieval, transaction history, investment holdings, and asset reports for Firstrade accounts. Community-developed unofficial Python SDKs also exist for session- based automation but are not affiliated with or endorsed by Firstrade.
 
-## API Access
+**Areas:** Brokerage · Commission-Free Trading · Stocks · ETFs · Options · Mutual Funds · Fixed Income · Retirement · IRA · Investing · Finance · Open Banking
 
-Firstrade does not publish an official public REST API. Programmatic account access is available through the **Plaid** financial data aggregation platform, which supports:
+## Firstrade on APIs.io
 
-- **Assets** — Consolidated account balance summaries and asset reports (JSON and PDF)
-- **Balance** — Current and available account balances
-- **Transactions** — Up to 24 months of transaction history
-- **Investments** — Retirement, brokerage, and crypto holdings
+Everything profiled for Firstrade is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/firstrade/](https://apis.io/providers/firstrade/)** — or go straight to one of the APIs or properties below.
 
-Developers integrate via [Plaid's API](https://plaid.com/institutions/firstrade/) using Plaid Link for customer consent-based authentication.
+### APIs (6)
 
-## Trading Products
+- [Firstrade Account Data API (via Plaid)](https://apis.io/apis/firstrade/firstrade-account-data-api-via-plaid/) — Access to Firstrade account data is available through the Plaid financial data aggregation platform. Plaid supports four product categories for Firstrade:…
+- [Firstrade Account API](https://apis.io/apis/firstrade/firstrade-account-api/) — Account list, balances, positions, and history
+- [Firstrade Authentication API](https://apis.io/apis/firstrade/firstrade-authentication-api/) — Session login and MFA flows
+- [Firstrade Market Data API](https://apis.io/apis/firstrade/firstrade-market-data-api/) — Stock quotes, OHLC chart data, and option chains
+- [Firstrade Orders API](https://apis.io/apis/firstrade/firstrade-orders-api/) — Equity and option order placement, listing, and cancellation
+- [Firstrade Watchlist API](https://apis.io/apis/firstrade/firstrade-watchlist-api/) — Watchlist CRUD operations
 
-- Stocks (NYSE, AMEX, Nasdaq, OTC)
-- ETFs (2,200+ available)
-- Options (OptionsWizard analytics tool included)
-- Mutual Funds (11,000+ available)
-- Fixed Income (Treasury bonds, municipal bonds, CDs, agency bonds)
+### Published properties
 
-## Account Types
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Individual, Joint (WROS and Tenants in Common), Custodial (UTMA/UGMA), Trust, Traditional IRA, Roth IRA, Rollover IRA, SEP IRA, SIMPLE IRA, Coverdell ESA, and margin accounts.
+#### Agentic access (1)
 
-## Pricing
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- $0 commissions on stocks, ETFs, options, and most mutual funds
-- $0 options contract fees
-- No account minimums
-- No inactivity fees
-- SEC transaction fee: $20.60 per million dollars on eligible sell transactions
-- Options Regulatory Fee: $0.02375 per contract
+- [Firstrade Agentic Access](https://apis.io/agentic-access/firstrade/firstrade-agentic-access/)
 
-## Links
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [Firstrade Unofficial Account API](https://apis.io/collections/firstrade/open-firstrade-account-api/)
+- [Firstrade Unofficial Account Authentication API](https://apis.io/collections/firstrade/open-firstrade-authentication-api/)
+- [Firstrade Unofficial Account Market Data API](https://apis.io/collections/firstrade/open-firstrade-market-data-api/)
+- [Firstrade Unofficial Account Orders API](https://apis.io/collections/firstrade/open-firstrade-orders-api/)
+- [Firstrade Unofficial Account Watchlist API](https://apis.io/collections/firstrade/open-firstrade-watchlist-api/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Firstrade Authentication](https://apis.io/security/firstrade/firstrade-authentication/)
+- [Firstrade Domain Security](https://apis.io/security/firstrade/firstrade-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Plans](https://apis.io/plans/firstrade/plans/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rate Limits](https://apis.io/rate-limits/firstrade/rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Finops](https://apis.io/finops/firstrade/finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.firstrade.com/)
-- [Trading Products](https://www.firstrade.com/trading)
 - [Pricing](https://www.firstrade.com/trading/pricing)
-- [Help Center](https://help.firstrade.com/)
-- [Plaid Integration](https://plaid.com/institutions/firstrade/)
-- [Open Banking Tracker](https://www.openbankingtracker.com/provider/firstrade)
+- [Terms of service](https://www.firstrade.com/content/en-us/aboutus/termsofuse)
+- [Privacy policy](https://www.firstrade.com/content/en-us/aboutus/privacypolicy)
+
+## API Evangelist rating
+
+**Kin Score 30.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 47.4 |
+| Contract governance | 0.0 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 28.6 |
+| Access clarity | 36.8 |
+
+**Agent readiness 21.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 15.7** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/firstrade/](https://apis.io/providers/firstrade/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Firstrade: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/firstrade/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
